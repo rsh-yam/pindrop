@@ -47,9 +47,11 @@ public class Details {
 	public static String getCPU() {
 		StringBuffer sb = new StringBuffer();
 		double cpu = bean.getSystemLoadAverage() / bean.getAvailableProcessors();
-		sb.append("<cpu>");
-		sb.append(cpu);
-		sb.append("</cpu>");
+		if (cpu > 0) {
+			sb.append("<cpu>");
+			sb.append(cpu);
+			sb.append("</cpu>");
+		}
 		CPU.insert(cpu);
 		return sb.toString();
 

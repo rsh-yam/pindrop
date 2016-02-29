@@ -101,22 +101,22 @@ public class Memory {
 				String totalSwap = rs.getString("totalswap");
 				String freeSwap = rs.getString("freeswap");
 
-				if (totalMem.equals("-1")) {
+				if (!totalMem.equals("-1")) {
 					sb.append("<totalMem>");
 					sb.append(totalMem);
 					sb.append("</totalMem>");
 				}
-				if (freeMem.equals("-1")) {
+				if (!freeMem.equals("-1")) {
 					sb.append("<freeMem>");
 					sb.append(freeMem);
 					sb.append("</freeMem>");
 				}
-				if (totalSwap.equals("-1")) {
+				if (!totalSwap.equals("-1")) {
 					sb.append("<totalSwap>");
 					sb.append(totalSwap);
 					sb.append("</totalSwap>");
 				}
-				if (freeSwap.equals("-1")) {
+				if (!freeSwap.equals("-1")) {
 					sb.append("<freeSwap>");
 					sb.append(freeSwap);
 					sb.append("</freeSwap>");

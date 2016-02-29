@@ -98,17 +98,17 @@ public class Disk {
 				String free = rs.getString("free");
 				String total = rs.getString("total");
 
-				if (usable.equals("-1")) {
+				if (!usable.equals("-1")) {
 					sb.append("<usable>");
 					sb.append(usable);
 					sb.append("</usable>");
 				}
-				if (free.equals("-1")) {
+				if (!free.equals("-1")) {
 					sb.append("<free>");
 					sb.append(free);
 					sb.append("</free>");
 				}
-				if (total.equals("-1")) {
+				if (!total.equals("-1")) {
 					sb.append("<total>");
 					sb.append(total);
 					sb.append("</total>");

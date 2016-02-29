@@ -94,7 +94,7 @@ public class CPU {
 			if (rs.next()) {
 				String cpu = rs.getString("cpu");
 
-				if (cpu.equals("-1")) {
+				if (Double.parseDouble(cpu) > 0) {
 					sb.append("<cpu>");
 					sb.append(cpu);
 					sb.append("</cpu>");
