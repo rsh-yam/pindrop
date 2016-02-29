@@ -41,7 +41,7 @@ public class Details {
 		}
 
 		Memory.insert(totalMem, freeMem, totalSwap, freeSwap);
-		return sb.toString();
+		return "<mem>" + sb.toString() + "</mem>";
 	}
 
 	public static String getCPU() {
@@ -74,6 +74,18 @@ public class Details {
 		}
 
 		return sb.toString();
+	}
+
+	public static String getMem(long time) {
+		return Memory.get(time);
+	}
+
+	public static String getCPU(long time) {
+		return CPU.get(time);
+	}
+
+	public static String getDisk(long time) {
+		return Disk.get(time);
 	}
 
 }

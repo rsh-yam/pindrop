@@ -64,4 +64,49 @@ public class CPU {
 
 	}
 
+	public static String get(long time) {
+
+		Connection conn = null;
+		try {
+			conn = Database.getConnection();
+		} catch (SQLException e) {
+			System.err.println("ERROR: Could not connect to the database");
+			e.printStackTrace();
+			return null;
+		}
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			String createString = "SELECT * FROM cpu WHERE time = '" + time + "'";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(createString);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		try {
+			if (rs == null || rs.isClosed())
+				return null;
+
+			StringBuffer sb = new StringBuffer();
+			if (rs.next()) {
+				String cpu = rs.getString("cpu");
+
+				if (cpu.equals("-1")) {
+					sb.append("<cpu>");
+					sb.append(cpu);
+					sb.append("</cpu>");
+				}
+
+				return sb.toString();
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+		return null;
+
+	}
+
 }

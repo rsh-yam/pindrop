@@ -12,7 +12,7 @@ public class Metrics {
 	@GET
 	@Produces("application/xml")
 	public String metrics() {
-		String mem = "<mem>" + Details.getMem() + "</mem>";
+		String mem = Details.getMem();
 		String cpu = Details.getCPU();
 		String disk = Details.getDisk();
 		return "<system>" + mem + cpu + disk + "</system>";
@@ -22,6 +22,9 @@ public class Metrics {
 	@GET
 	@Produces("application/xml")
 	public String metrics(@PathParam("c") String str) {
-		return "<demo>" + "<value>" + str + "</value>" + "</demo>";
+		String mem = Details.getMem(Long.parseLong(str));
+		String cpu = Details.getCPU(Long.parseLong(str));
+		String disk = Details.getDisk(Long.parseLong(str));
+		return "<system>" + mem + cpu + disk + "</system>";
 	}
 }

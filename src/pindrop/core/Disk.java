@@ -66,4 +66,61 @@ public class Disk {
 
 	}
 
+	public static String get(long time) {
+
+		Connection conn = null;
+		try {
+			conn = Database.getConnection();
+		} catch (SQLException e) {
+			System.err.println("ERROR: Could not connect to the database");
+			e.printStackTrace();
+			return null;
+		}
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			String createString = "SELECT * FROM disk WHERE time = '" + time + "'";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(createString);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		try {
+			if (rs == null || rs.isClosed())
+				return null;
+
+			StringBuffer sb = new StringBuffer();
+			if (rs.next()) {
+				String usable = rs.getString("usable");
+				String free = rs.getString("free");
+				String total = rs.getString("total");
+
+				if (usable.equals("-1")) {
+					sb.append("<usable>");
+					sb.append(usable);
+					sb.append("</usable>");
+				}
+				if (free.equals("-1")) {
+					sb.append("<free>");
+					sb.append(free);
+					sb.append("</free>");
+				}
+				if (total.equals("-1")) {
+					sb.append("<total>");
+					sb.append(total);
+					sb.append("</total>");
+				}
+
+				return sb.toString();
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		}
+		return null;
+
+	}
+
 }
